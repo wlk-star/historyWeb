@@ -1,0 +1,21 @@
+.wrapper {
+  overflow: hidden;
+  .backgrounds {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(237, 234, 234);
+    .colorBlock {
+      position: fixed;
+      bottom: -10vh;
+      width: 130vw;
+      height: 50vh;
+      background-color: rgb(230, 225, 229);
+      transform: rotate(-10deg);
+      -webkit-transform: rotate(-10deg);
+      -moz-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+      -o-transform: rotate(-10deg);
+    }
+  }
+}

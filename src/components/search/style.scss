@@ -1,0 +1,57 @@
+@keyframes animate {
+  from {
+    width: 200px;
+  }
+  to {
+    width: 300px;
+  }
+}
+.searchBar {
+  
+  form{
+    position: relative;
+    margin: 0 auto;
+  }
+  input,
+  button {
+    border: none;
+    outline: none;
+  }
+
+  input {
+    width: 200px;
+    height: 40px;
+    padding-left: 20px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    &:hover {
+      animation-name: animate;
+      animation-duration: 1.5s;
+      animation-fill-mode:forwards;
+      animation-timing-function:ease;
+    }
+  }
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    &:before 
+    {
+      content: 'o';
+      font-size: 13px;
+      color: black;
+    }                           
+  }
+}

@@ -1,0 +1,142 @@
+// div::-webkit-scrollbar {
+//   display: none;
+// }
+@mixin borderRadius($value) {
+  border-radius: $value;
+  -webkit-border-radius: $value;
+  -moz-border-radius: $value;
+  -ms-border-radius: $value;
+  -o-border-radius: $value;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: #1b2e41;
+}
+::-webkit-scrollbar-track {
+  display: none;
+}
+.container {
+  background-color: #f3f5f7;
+}
+.app {
+  background-image: url(./common/images/scott.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 60vh;
+}
+.main {
+  width: 70vw;
+
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  // background-color: white;
+  // box-shadow: 2px 2px 5px rgb(123, 123, 123);
+  .box {
+    width: 100px;
+    height: 100px;
+
+    background: #aad1e2;
+    box-shadow: -14px 14px 27px #91b2c0, 14px -14px 27px #c4f0ff;
+    @include borderRadius(38px);
+  }
+
+  .main-left {
+    height: 1000px;
+    flex: 2;
+    background-color: blanchedalmond;
+    .item {
+      height: 200px;
+      margin: 5px;
+      background-color: white;
+      @include borderRadius(10px);
+    }
+    .item2 {
+      height: 200px;
+      margin: 5px;
+      background-image: linear-gradient(to right, #acb6e5, #86fde8);
+      @include borderRadius(10px);
+    }
+  }
+  .main-right {
+    position: relative;
+    height: 1000px;
+    flex: 5;
+    background-color: rgb(255, 196, 196);
+    // 块级元素
+    .son {
+      background-color: brown;
+      width: 200px;
+      height: 200px;
+    }
+    .s1 {
+      // 块级元素水平居中
+      margin: 10px auto;
+    }
+    // 使用flex布局，添加在父容器上
+    .parent1 {
+      display: flex;
+      justify-content: center;
+    }
+    // 使用CSS3中新增的transform属性
+    .s2 {
+      position: absolute;
+      //left的百分比是父容器宽度的百分比left:50%;
+      // transform的百分比是自身的百分比
+      transform: translate(-50%, 0);
+      -webkit-transform: translate(-50%, 0);
+      -moz-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+      -o-transform: translate(-50%, 0);
+    }
+    // 使用绝对定位方式, 以及负值的margin-left
+    .s3 {
+      position: absolute;
+      width: 200px;
+      left: 50%;
+      margin-left: -100px;
+    }
+    .line {
+      position: relative;
+      background-color: rgb(118, 201, 90);
+      width: 100%;
+      height: 200px;
+      margin-top: 10px;
+      .s4 {
+        background-color: white;
+        position: absolute;
+        top: 50%;
+        width: 50px;
+        height: 50px;
+        margin-top: -25px;
+      }
+    }
+
+    .l2 {
+      // flex布局实现垂直居中
+      display: flex;
+      align-items: center;
+      .s5 {
+        background-color: white;
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .l3 {
+      display: table;
+      // 没有固定高度
+      .s6 {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+}
