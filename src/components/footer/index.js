@@ -1,64 +1,42 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import './style.scss'
-
+import Icon from '../../common/images/videoIcon.png'
 function Footer(props) {
   const [activeIndex, setActiveIndex] = useState(1)
   const [overState, setOverState] = useState(0)
   const [distant, setDistant] = useState(0)
-  const footerRef = useRef(null)
+  const [devWidth, setDevWidth] = useState(document.documentElement.clientWidth)
+  const footerRef = useRef(0)
   let animateTimer = null
   let maxDistant = 0
+
+  window.onresize = function (e) {
+    setDevWidth(document.documentElement.clientWidth)
+  }
+  useEffect(() => {
+    if (document.documentElement.clientWidth < footerRef.current.clientWidth) {
+      setOverState(-1)
+    }
+  }, [])
   useEffect(() => {
     // 监听底部
     footerRef.current.addEventListener('mouseover', _handleMouseMove)
     footerRef.current.addEventListener('mouseleave', _handleMouseLeave)
-    // window/addEventListener('mouseleave')
+
     // 可移动的距离
-    if (
-      maxDistant !==
-      document.documentElement.clientWidth - footerRef.current.clientWidth
-    ) {
+    if (maxDistant !== devWidth - footerRef.current.clientWidth) {
       console.log('offsetLeft', footerRef.current.offsetLeft)
-      maxDistant =
-        document.documentElement.clientWidth - footerRef.current.clientWidth
+      maxDistant = devWidth - footerRef.current.clientWidth
     }
     return () => {
       footerRef.current.removeEventListener('mouseover', _handleMouseMove)
       footerRef.current.removeEventListener('mouseleave', _handleMouseLeave)
     }
   }, [overState])
-  // useEffect(() => {
-  //   // 移动底部
-  //   if (overState === 1) {
-  //     console.log('right')
-  //     if(!animateTimer){
-  //       let value = distant
-  //       animateTimer = setInterval(() => {
-  //         setDistant(value)
-  //         if(value+1>maxDistant){
-  //           clearInterval(animateTimer)
-  //         }else{
-  //           value = value +1;
-  //         }
-
-  //         // window.requestAnimationFrame(() => {
-  //         //   if (distant < maxDistant) {
-  //         //     setDistant(distant+20)
-  //         //   }
-  //         // })
-  //       }, 40)
-  //     }
-  //     console.log(animateTimer);
-  //   } else if (overState === 0) {
-  //     console.log('stop');
-  //     clearInterval(animateTimer)
-  //   }
-  // }, [overState])
 
   const _handleMouseMove = (e) => {
-    const { x, y } = e
-
-    const devWidth = document.documentElement.clientWidth
+    const { x } = e
+    // const devWidth = document.documentElement.clientWidth
     let tempState = 0
     if (x >= 0.8 * devWidth) {
       tempState = 1
@@ -67,10 +45,7 @@ function Footer(props) {
     } else {
       tempState = 0
     }
-    // console.log('tempState', tempState)
 
-    // if (overState !== tempState) {
-    // console.log('maxDistant', maxDistant)
     if (tempState === -1) {
       setDistant(0)
     } else if (tempState === 1) {
@@ -98,74 +73,96 @@ function Footer(props) {
     // }
   }
   const _handleMouseLeave = (e) => {
-    console.log(overState)
+    // console.log(overState)
     let offset = footerRef.current.offsetLeft
     setDistant(offset)
   }
   console.log('distant', distant)
   return (
     <div
-      className="footer"
-      ref={footerRef}
-      style={{
-        // transform: [`translate(${distant}px, 0px)`],
-        left: distant,
-        transition: overState === 0 ? 'left 1.5s' : 'left 3s',
-      }}
+      className="footerContainer"
       // 事件委托
       onClick={(e) => {
         e.persist()
-        console.log(e);
-        console.log(e.target.getAttribute('index'));
-      //   if(e.target && e.target.nodeName.toUpperCase == "LI") {
-      //     // 真正的处理过程在这里
-      //     // console.log("List item ",e.target.id.replace("post-")," was clicked!");
-      //   }
-      //   // setActiveIndex()
+        console.log(e.target.nodeName)
+        let nodeElement = e.target
+        if (e.target.nodeName === 'SPAN' || e.target.nodeName === 'IMG') {
+          nodeElement = e.target.parentNode
+        }
+        const index = nodeElement.getAttribute('index')
+        if (nodeElement && nodeElement.nodeName === 'A') {
+          setActiveIndex(Number(index))
+          // 回调函数
+          props.onIndexChange(Number(index))
+        }
       }}
     >
-      {[
-        0,
-        '1927 - 28',
-        '1927 - 28',
-        '1927 - 28',
-        '1927 - 28',
-        '1927 - 28',
-        '1927 - 28',
-        '1927 - 28',
-      ].map((value, index) => {
-        return (
-          <a
-            index={index}
-            key={`footer${index}`}
-            className={
-              index === activeIndex ? 'footer_item activeStyle' : 'footer_item'
-            }
-            onClick={() => {
-              setActiveIndex(index)
-            }}
-          >
-            <span
+      <div
+        ref={footerRef}
+        className={footerRef.current.clientWidth > devWidth ? 'footer' : ''}
+        style={{
+          display: 'flex',
+          // flex: 1,
+          flexDirection: 'row',
+          // transform: [`translate(${distant}px, 0px)`],
+          left: distant,
+          transition: overState === 0 ? 'left 1.5s' : 'left 3s',
+        }}
+      >
+        {[
+          0,
+          '1927 - 28',
+          '1927 - 28',
+          '1927 - 28',
+          '1927 - 28',
+          '1927 - 28',
+          '1927 - 28',
+          '1927 - 28',
+        ].map((value, index) => {
+          return (
+            <a
+              index={index}
+              key={`footer${index}`}
               className={
-                index === activeIndex ? 'item_text active_text' : 'item_text'
+                index === activeIndex
+                  ? 'footer_item activeStyle'
+                  : 'footer_item'
               }
             >
-              {value}
-            </span>
-            <span
-              className="bottomLine"
-              style={
-                index === activeIndex
-                  ? {
-                      width: '216px',
-                      opacity: 1,
-                    }
-                  : null
-              }
-            ></span>
-          </a>
-        )
-      })}
+              {index === 0 ? (
+                <img
+                  src={Icon}
+                  className="vedioIcon"
+                  style={{
+                    opacity: index === activeIndex ? '1' : null,
+                  }}
+                ></img>
+              ) : (
+                <span
+                  className={
+                    index === activeIndex
+                      ? 'item_text active_text'
+                      : 'item_text'
+                  }
+                >
+                  {value}
+                </span>
+              )}
+              <span
+                className="bottomLine"
+                style={
+                  index === activeIndex
+                    ? {
+                        width: '216px',
+                        opacity: 1,
+                      }
+                    : null
+                }
+              ></span>
+            </a>
+          )
+        })}
+      </div>
     </div>
   )
 }

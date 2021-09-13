@@ -3,22 +3,27 @@
 *::after {
   box-sizing: border-box;
 }
-.footer {
+.footerContainer {
   position: fixed;
   bottom: 0;
   height: 106px;
-  //width: 100vw;
+  width: 100vw;
   background-color: #1e0eb6;
   display: flex;
   flex-direction: row;
+
+  justify-content: center;
   transition: left 3s;
   -webkit-transition: left 3s;
   -moz-transition: left 3s;
   -ms-transition: left 3s;
   -o-transition: left 3s;
 
-  .activeStyle
-  {
+  .footer {
+    position: fixed;
+    left: 0;
+  }
+  .activeStyle {
     background-color: rgba(24, 12, 136, 0.5);
   }
   .footer_item {
@@ -28,10 +33,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // &:active {
-    //   background-color: rgb(27, 13, 159);
-    // }
+    flex-shrink: 0;
+    // hover修改子元素
+    &:hover{
+      .item_text{
+        color: white;
+        &::after {
+          transform: translate(-50%, 0);
+          bottom: -6px;
+          opacity: 1;
+        }
+      }
+      .vedioIcon{
+        opacity: 1;
+      }
+    }
 
+    .vedioIcon {
+      height: 40px;
+      opacity: 0.4;
+      transition: opacity 0.6s;
+    }
     .item_text {
       font-size: x-large;
       color: rgba(255, 255, 255, 0.4);
@@ -56,14 +78,6 @@
         // opacity: 1;
         transition: transform 0.4s cubic-bezier(0.5, 0, 0.1, 1),
           opacity 0.2s cubic-bezier(0.5, 0, 0.1, 1);
-      }
-      &:hover {
-        color: white;
-      }
-      &:hover::after {
-        transform: translate(-50%, 0);
-        bottom: -6px;
-        opacity: 1;
       }
     }
 

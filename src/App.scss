@@ -29,114 +29,184 @@
   width: 100%;
   height: 60vh;
 }
-.main {
-  width: 70vw;
+// .main {
+//   width: 70vw;
 
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+//   margin: 0 auto;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
 
-  // background-color: white;
-  // box-shadow: 2px 2px 5px rgb(123, 123, 123);
-  .box {
-    width: 100px;
-    height: 100px;
+//   // background-color: white;
+//   // box-shadow: 2px 2px 5px rgb(123, 123, 123);
+//   .box {
+//     width: 100px;
+//     height: 100px;
 
-    background: #aad1e2;
-    box-shadow: -14px 14px 27px #91b2c0, 14px -14px 27px #c4f0ff;
-    @include borderRadius(38px);
-  }
+//     background: #aad1e2;
+//     box-shadow: -14px 14px 27px #91b2c0, 14px -14px 27px #c4f0ff;
+//     @include borderRadius(38px);
+//   }
 
-  .main-left {
-    height: 1000px;
-    flex: 2;
-    background-color: blanchedalmond;
-    .item {
-      height: 200px;
-      margin: 5px;
-      background-color: white;
-      @include borderRadius(10px);
-    }
-    .item2 {
-      height: 200px;
-      margin: 5px;
-      background-image: linear-gradient(to right, #acb6e5, #86fde8);
-      @include borderRadius(10px);
-    }
-  }
-  .main-right {
-    position: relative;
-    height: 1000px;
-    flex: 5;
-    background-color: rgb(255, 196, 196);
-    // 块级元素
-    .son {
-      background-color: brown;
-      width: 200px;
-      height: 200px;
-    }
-    .s1 {
-      // 块级元素水平居中
-      margin: 10px auto;
-    }
-    // 使用flex布局，添加在父容器上
-    .parent1 {
-      display: flex;
-      justify-content: center;
-    }
-    // 使用CSS3中新增的transform属性
-    .s2 {
-      position: absolute;
-      //left的百分比是父容器宽度的百分比left:50%;
-      // transform的百分比是自身的百分比
-      transform: translate(-50%, 0);
-      -webkit-transform: translate(-50%, 0);
-      -moz-transform: translate(-50%, 0);
-      -ms-transform: translate(-50%, 0);
-      -o-transform: translate(-50%, 0);
-    }
-    // 使用绝对定位方式, 以及负值的margin-left
-    .s3 {
-      position: absolute;
-      width: 200px;
-      left: 50%;
-      margin-left: -100px;
-    }
-    .line {
-      position: relative;
-      background-color: rgb(118, 201, 90);
-      width: 100%;
-      height: 200px;
-      margin-top: 10px;
-      .s4 {
-        background-color: white;
-        position: absolute;
-        top: 50%;
-        width: 50px;
-        height: 50px;
-        margin-top: -25px;
-      }
-    }
+//   .main-left {
+//     height: 1000px;
+//     flex: 2;
+//     background-color: blanchedalmond;
+//     .item {
+//       height: 200px;
+//       margin: 5px;
+//       background-color: white;
+//       @include borderRadius(10px);
+//     }
+//     .item2 {
+//       height: 200px;
+//       margin: 5px;
+//       background-image: linear-gradient(to right, #acb6e5, #86fde8);
+//       @include borderRadius(10px);
+//     }
+//   }
+//   .main-right {
+//     position: relative;
+//     height: 1000px;
+//     flex: 5;
+//     background-color: rgb(255, 196, 196);
+//     // 块级元素
+//     .son {
+//       background-color: brown;
+//       width: 200px;
+//       height: 200px;
+//     }
+//     .s1 {
+//       // 块级元素水平居中
+//       margin: 10px auto;
+//     }
+//     // 使用flex布局，添加在父容器上
+//     .parent1 {
+//       display: flex;
+//       justify-content: center;
+//     }
+//     // 使用CSS3中新增的transform属性
+//     .s2 {
+//       position: absolute;
+//       //left的百分比是父容器宽度的百分比left:50%;
+//       // transform的百分比是自身的百分比
+//       transform: translate(-50%, 0);
+//       -webkit-transform: translate(-50%, 0);
+//       -moz-transform: translate(-50%, 0);
+//       -ms-transform: translate(-50%, 0);
+//       -o-transform: translate(-50%, 0);
+//     }
+//     // 使用绝对定位方式, 以及负值的margin-left
+//     .s3 {
+//       position: absolute;
+//       width: 200px;
+//       left: 50%;
+//       margin-left: -100px;
+//     }
+//     .line {
+//       position: relative;
+//       background-color: rgb(118, 201, 90);
+//       width: 100%;
+//       height: 200px;
+//       margin-top: 10px;
+//       .s4 {
+//         background-color: white;
+//         position: absolute;
+//         top: 50%;
+//         width: 50px;
+//         height: 50px;
+//         margin-top: -25px;
+//       }
+//     }
 
-    .l2 {
-      // flex布局实现垂直居中
-      display: flex;
-      align-items: center;
-      .s5 {
-        background-color: white;
-        width: 50px;
-        height: 50px;
-      }
-    }
+//     .l2 {
+//       // flex布局实现垂直居中
+//       display: flex;
+//       align-items: center;
+//       .s5 {
+//         background-color: white;
+//         width: 50px;
+//         height: 50px;
+//       }
+//     }
 
-    .l3 {
-      display: table;
-      // 没有固定高度
-      .s6 {
-        display: table-cell;
-        vertical-align: middle;
-      }
-    }
-  }
+//     .l3 {
+//       display: table;
+//       // 没有固定高度
+//       .s6 {
+//         display: table-cell;
+//         vertical-align: middle;
+//       }
+//     }
+//   }
+// }
+
+.friend-enter {
+  transform: translate(100%, 0);
+  opacity: 0;
+}
+
+.friend-enter-active {
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 500ms;
+}
+
+.friend-exit {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.friend-exit-active {
+  transform: translate(100%, 0);
+  opacity: 0;
+  transition: all 500ms;
+  -webkit-transform: translate(100%, 0);
+  -moz-transform: translate(100%, 0);
+  -ms-transform: translate(100%, 0);
+  -o-transform: translate(100%, 0);
+}
+
+
+
+.slide-enter,.slide-appear {
+  transform: translate(0, 100%);
+  opacity: 1;
+  -webkit-transform: translate(0, 100%);
+  -moz-transform: translate(0, 100%);
+  -ms-transform: translate(0, 100%);
+  -o-transform: translate(0, 100%);
+}
+
+.slide-enter-active,.slide-appear-active {
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 1000ms;
+  -webkit-transition: all 1000ms;
+  -moz-transition: all 1000ms;
+  -ms-transition: all 1000ms;
+  -o-transition: all 1000ms;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+}
+
+.slide-exit {
+  transform: translateY(0, 0);
+  opacity: 1;
+  -webkit-transform: translateY(0, 0);
+  -moz-transform: translateY(0, 0);
+  -ms-transform: translateY(0, 0);
+  -o-transform: translateY(0, 0);
+}
+
+.slide-exit-active {
+  transform: translateY(100%, 0);
+  opacity: 0;
+  transition: all 500ms;
+  -webkit-transform: translateY(100%, 0);
+  -moz-transform: translateY(100%, 0);
+  -ms-transform: translateY(100%, 0);
+  -o-transform: translateY(100%, 0);
 }

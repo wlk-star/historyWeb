@@ -5,6 +5,7 @@
     width: 100vw;
     height: 100vh;
     background-color: rgb(237, 234, 234);
+    z-index: -1;
     .colorBlock {
       position: fixed;
       bottom: -10vh;
