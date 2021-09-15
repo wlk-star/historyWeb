@@ -18,5 +18,41 @@
       -ms-transform: rotate(-10deg);
       -o-transform: rotate(-10deg);
     }
+    .logo {
+      // max-width: 180px;
+      top: 46px;
+      left: 52px;
+      padding-top: 20px;
+      margin-top: -20px;
+      position: absolute;
+      z-index: 11;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      h2 {
+        // max-width: 180px;
+        table-layout: fixed;
+        word-wrap: break-all;
+        word-break: normal;
+        overflow: hidden;
+        font-size: x-large;
+        color: #0f00ce;
+      }
+      div {
+        display: block;
+        max-width:   180px;
+        margin-top: 16px;
+        // font-family: 'Lalka';
+        font-weight: normal;
+        font-size: 20px;
+        font-size: 1rem;
+        line-height: 1.16667;
+        height: 28px;
+        text-align: center;
+        opacity: 1;
+        color: #0f00ce;
+      }
+    }
   }
 }

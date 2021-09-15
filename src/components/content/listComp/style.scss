@@ -1,0 +1,100 @@
+.history_detail {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50vw;
+  height: calc(100vh - 106px);
+  background-color: #f8f8f8;
+  z-index: 7;
+  li {
+    display: list-item;
+    padding: 144px 112px 96px 88px;
+    color: #292626;
+    font-size: 100%;
+    font-style: normal;
+    vertical-align: baseline;
+    p {
+      margin-bottom: 1.75em;
+      font-size: 1rem;
+      line-height: 1.75;
+      transition: all ease-in 0.2s;
+      -webkit-transition: all ease-in 0.2s;
+      -moz-transition: all ease-in 0.2s;
+      -ms-transition: all ease-in 0.2s;
+      -o-transition: all ease-in 0.2s;
+}
+  }
+  button {
+    position: fixed;
+    top: 48px;
+    right: 44px;
+    z-index: 7;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    transform: rotate(0deg);
+    transition-delay: 0.2s;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+      opacity 0.2s cubic-bezier(0.5, 0, 0.1, 1);
+    &:hover {
+      opacity: 1;
+      transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  transition: transform 0.8s ease-in-out;
+  -webkit-transition: transform 0.8s ease-in-out;
+  -moz-transition: transform 0.8s ease-in-out;
+  -ms-transition: transform 0.8s ease-in-out;
+  -o-transition: transform 0.8s ease-in-out;
+}
+
+
+.fade-enter {
+  position: relative;
+  opacity: 0;
+  transform: translate(0, 30%);
+  -webkit-transform: translate(0, 30%);
+  -moz-transform: translate(0, 30%);
+  -ms-transform: translate(0, 30%);
+  -o-transform: translate(0, 30%);
+}
+
+.fade-enter-active{
+  position: relative;
+  transform: translate(0, 0);
+  opacity: 1;
+  transition: all 1s cubic-bezier(.48,-0.36,.5,1.42);
+  -webkit-transition: all 1s cubic-bezier(.48,-0.36,.5,1.42);
+  -moz-transition: all 1s cubic-bezier(.48,-0.36,.5,1.42);
+  -ms-transition: all 1s cubic-bezier(.48,-0.36,.5,1.42);
+  -o-transition: all 1s cubic-bezier(.48,-0.36,.5,1.42);
+}
+
+.fade-exit {
+  position: relative;
+  // transform: translate(0, 0);
+  opacity: 1;
+}
+
+.fade-exit-active {
+  position: relative;
+  opacity: 0;
+
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -webkit-transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -ms-transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -o-transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
