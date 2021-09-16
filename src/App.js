@@ -1,6 +1,10 @@
 import { Fragment, useEffect, useState, useRef, useCallback } from 'react'
 import './App.scss'
-import { SwitchTransition, CSSTransition,TransitionGroup } from 'react-transition-group'
+import {
+  SwitchTransition,
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group'
 import Header from './components/header'
 import Content from './components/content'
 import Footer from './components/footer'
@@ -9,18 +13,25 @@ import { Route, Switch } from 'react-router-dom'
 
 function App() {
   const [show, setShow] = useState(true)
-  const [index, setIndex] = useState(1)
+  const [footerMsg, setFooterMsg] = useState({
+    index: 1,
+    period: {
+      startYear: '1839',
+      endYear: '1860',
+    },
+  })
   const [friends, setFriends] = useState([])
-  let add;
+  let add
   useEffect(() => {
-    add = () => setTimeout(() => {
-      console.log('a',friends);
-      setFriends([...friends, "coderwhy"])
-    },500)
-  },[friends])
-  const _onIndexChange = (index) => {
-    console.log('home', index)
-    setIndex(index)
+    add = () =>
+      setTimeout(() => {
+        console.log('a', friends)
+        setFriends([...friends, 'coderwhy'])
+      }, 500)
+  }, [friends])
+  const _onFooterChange = (index, period) => {
+    setFooterMsg({ index, period })
+    console.log({ index, period })
   }
   return (
     <Fragment>
@@ -70,8 +81,11 @@ function App() {
             --Friend
           </button>
         </TransitionGroup> */}
-        <Content activeIndex={index}></Content>
-        <Footer onIndexChange={_onIndexChange}></Footer>
+        <Content
+          activeIndex={footerMsg.index}
+          period={footerMsg.period}
+        ></Content>
+        <Footer onFooterChange={_onFooterChange}></Footer>
       </Wrapper>
 
       {/* <Switch>

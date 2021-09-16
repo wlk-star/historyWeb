@@ -6,17 +6,39 @@ function Footer(props) {
   const [overState, setOverState] = useState(0)
   const [distant, setDistant] = useState(0)
   const [devWidth, setDevWidth] = useState(document.documentElement.clientWidth)
+  const [dataList, setDataList] = useState([])
   const footerRef = useRef(0)
-  let animateTimer = null
   let maxDistant = 0
-
+  // let eventPeriodList = [];
   window.onresize = function (e) {
     setDevWidth(document.documentElement.clientWidth)
   }
   useEffect(() => {
     if (document.documentElement.clientWidth < footerRef.current.clientWidth) {
       setOverState(-1)
+      setDistant(0)
     }
+    fetch('http://localhost:3005/history/period', {
+      //请求方式
+      method: 'GET',
+      //将请求的参数转成json
+      // body: JSON.stringify(param),
+      //请求头
+      headers: {
+        'content-type': 'application/json',
+      },
+    }).then(function (response) {
+      if (response.status === 200) {
+        response.json().then(function (res) {
+          //获取请求的返回字段
+          console.log(res)
+          // eventPeriodList = data
+          setDataList(['vedio', ...res.data])
+        })
+      } else {
+        alert('网络请求错误')
+      }
+    })
   }, [])
   useEffect(() => {
     // 监听底部
@@ -66,10 +88,7 @@ function Footer(props) {
       setDistant(offset)
     }
 
-    setOverState(() => {
-      // console.log('set', tempState)
-      return tempState
-    })
+    setOverState(tempState)
     // }
   }
   const _handleMouseLeave = (e) => {
@@ -77,14 +96,14 @@ function Footer(props) {
     let offset = footerRef.current.offsetLeft
     setDistant(offset)
   }
-  console.log('distant', distant)
+  // console.log('distant', distant)
   return (
     <div
       className="footerContainer"
       // 事件委托
       onClick={(e) => {
         e.persist()
-        console.log(e.target.nodeName)
+        // console.log(e.target.nodeName)
         let nodeElement = e.target
         if (e.target.nodeName === 'SPAN' || e.target.nodeName === 'IMG') {
           nodeElement = e.target.parentNode
@@ -92,8 +111,10 @@ function Footer(props) {
         const index = nodeElement.getAttribute('index')
         if (nodeElement && nodeElement.nodeName === 'A') {
           setActiveIndex(Number(index))
+
+          const { startYear, endYear } = dataList[index]
           // 回调函数
-          props.onIndexChange(Number(index))
+          props.onFooterChange(Number(index), { startYear, endYear })
         }
       }}
     >
@@ -109,16 +130,7 @@ function Footer(props) {
           transition: overState === 0 ? 'left 1.5s' : 'left 3s',
         }}
       >
-        {[
-          0,
-          '1927 - 28',
-          '1927 - 28',
-          '1927 - 28',
-          '1927 - 28',
-          '1927 - 28',
-          '1927 - 28',
-          '1927 - 28',
-        ].map((value, index) => {
+        {dataList.map((item, index) => {
           return (
             <a
               index={index}
@@ -145,7 +157,7 @@ function Footer(props) {
                       : 'item_text'
                   }
                 >
-                  {value}
+                  {`${item.startYear} - ${item.endYear}`}
                 </span>
               )}
               <span

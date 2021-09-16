@@ -1,28 +1,63 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import '../style.scss'
 import './style.scss'
-import img from '../../../common/images/img.jpg'
 import close from '../../../common/images/close.png'
 import arrow from '../../../common/images/arrowRight.png'
-import {
-  SwitchTransition,
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group'
-let maxDistant
-const ListComp = () => {
+import { CSSTransition } from 'react-transition-group'
+
+const ListComp = (props) => {
   const listRef = useRef(0)
+  const [maxDistant, setMaxDistant] = useState(0)
   const [distant, setDistant] = useState(0)
   const [detailShow, setDetailShow] = useState(false)
   const [showIndex, setShowIndex] = useState(0)
+  const [eventsList, setEventsList] = useState([])
   useEffect(() => {
-    maxDistant =
+    setMaxDistant(
       listRef.current.clientWidth - document.documentElement.clientWidth
+    )
+
+    fetch(`http://localhost:3005/history/events?periodId=1`, {
+      //请求方式
+      method: 'GET',
+    }).then(function (response) {
+      if (response.status === 200) {
+        response.json().then(function (res) {
+          //获取请求的返回字段
+          console.log(res.data)
+          setEventsList(res.data)
+        })
+      } else {
+        alert('网络请求错误')
+      }
+    })
   }, [])
+  useEffect(() => {
+    fetch(`http://localhost:3005/history/events?periodId=${props.eventIndex}`, {
+      //请求方式
+      method: 'GET',
+    }).then(function (response) {
+      if (response.status === 200) {
+        response.json().then(function (res) {
+          //获取请求的返回字段
+          console.log(res.data)
+          setEventsList(res.data)
+        })
+      } else {
+        alert('网络请求错误')
+      }
+    })
+  }, [props.eventIndex])
+  // 每次更新都会执行
+  useEffect(() => {
+    setMaxDistant(
+      listRef.current.clientWidth - document.documentElement.clientWidth
+    )
+  })
   const detail = (index) => {
     setShowIndex(index)
     setDetailShow(true)
-    console.log(index)
+    // console.log(index)
   }
   const closeDetail = () => {
     setDetailShow(false)
@@ -67,20 +102,18 @@ const ListComp = () => {
           timeout={1000}
         >
           <li>
-            <p>
-              6 May – Janina Kilian-Stanisławska, art historian and illustrator
-              deported from Lvov to the Soviet Union in 1940, establishes the
-              Blue Almonds Polish Puppet Theatre in Samarkand, operating under
-              the auspices of the Uzbek State Philharmonic in Tashkent.
-            </p>
-            <p>
-              (Madam Twardowska) inaugurating the Blue Almonds Theatre under the
-              artistic direction of the institution’s founder.
-            </p>
+            <h1>{eventsList.length > 0 ? eventsList[showIndex].title : ''}</h1>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: `${
+                  eventsList.length > 0 ? eventsList[showIndex].content : ''
+                }`,
+              }}
+            />
           </li>
         </CSSTransition>
       </div>
-      <h2>1945-66</h2>
+      <h2>{`${props.period.startYear}-${props.period.endYear.substring(2,4)}`}</h2>
       <ul
         className="content"
         ref={listRef}
@@ -95,7 +128,8 @@ const ListComp = () => {
             : null,
         }}
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+        {eventsList.map((item, index) => {
+          //  "a".substring()
           return (
             <li
               key={index}
@@ -136,7 +170,7 @@ const ListComp = () => {
                   }
                 >
                   <a onClick={() => detail(index)}>
-                    <img src={img} />
+                    <img src={item.imgSrc} />
                   </a>
                 </figure>
               </div>
@@ -147,7 +181,7 @@ const ListComp = () => {
                 }}
               >
                 <a onClick={() => detail(index)}>
-                  <span>2000</span>
+                  <span>{item.year}</span>
                 </a>
               </div>
             </li>

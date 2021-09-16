@@ -54,7 +54,7 @@ function Content(props) {
             console.log('退出动画结束')
           }}
         >
-          <ListComp />
+          <ListComp eventIndex={props.activeIndex}  period={props.period}/>
         </CSSTransition>
       ) : null}
     </TransitionGroup>

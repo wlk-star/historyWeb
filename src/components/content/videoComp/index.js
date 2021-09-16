@@ -1,12 +1,17 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import '../style.scss'
-import qfl from '../../../common/images/qfl.mp4'
+// import qfl from '../../../common/images/qfl.mp4'
 import videoImage from '../../../common/images/video.jpg'
 const VideoComp = () => {
   const [play, setPlay] = useState(false)
   return (
     <div className="content_container">
-      <ul className="content">
+      <ul
+        className="content"
+        style={{
+          justifyContent: 'center',
+        }}
+      >
         <li
           className="content_item"
           style={{
@@ -18,7 +23,11 @@ const VideoComp = () => {
         >
           <div className="history_video">
             <figure>
-              <video id="video" src={qfl} controls></video>
+              <video
+                id="video"
+                src="http://localhost:3005/static/images/qfl.mp4"
+                controls
+              ></video>
             </figure>
           </div>
           <button
