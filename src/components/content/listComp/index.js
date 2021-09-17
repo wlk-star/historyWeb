@@ -170,7 +170,7 @@ const ListComp = (props) => {
                   }
                 >
                   <a onClick={() => detail(index)}>
-                    <img src={item.imgSrc} />
+                    <img src={item.imgSrc===""?'http://localhost:3005/static/images/noPicture.png':item.imgSrc} />
                   </a>
                 </figure>
               </div>
